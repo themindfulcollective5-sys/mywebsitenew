@@ -1,2 +1,12 @@
 - [ ] Yatra page content (waiting on user)
 - [ ] Real WhatsApp number (waiting on user)
+## Booking system
+- [ ] Enable Lovable Cloud + Razorpay connection
+- [ ] Database: sessions, bookings, customers, intake_answers, packages, roles + RLS
+- [ ] Booking flow with intake questions, consent, Razorpay checkout, confirmation page
+- [ ] Webhook confirmation (idempotent), 15-min hold release
+- [ ] Customer sign-in (email link + Google), My classes page
+- [ ] Admin dashboard: roster, waitlist, attendance, edit sessions, CSV
+- [ ] Emails: confirmation/receipt, admin alert, day-before reminder (needs email domain)
+- [ ] WhatsApp placeholder function with templates
+- [ ] Cancellation/refund + privacy pages
