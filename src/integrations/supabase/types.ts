@@ -14,16 +14,229 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          amount_paise: number
+          attended: boolean
+          created_at: string
+          customer_id: string
+          hold_expires_at: string | null
+          id: string
+          item_key: string
+          item_name: string
+          payment_id: string | null
+          provider_order_id: string | null
+          session_id: string
+          status: Database["public"]["Enums"]["booking_status"]
+        }
+        Insert: {
+          amount_paise: number
+          attended?: boolean
+          created_at?: string
+          customer_id: string
+          hold_expires_at?: string | null
+          id?: string
+          item_key: string
+          item_name: string
+          payment_id?: string | null
+          provider_order_id?: string | null
+          session_id: string
+          status?: Database["public"]["Enums"]["booking_status"]
+        }
+        Update: {
+          amount_paise?: number
+          attended?: boolean
+          created_at?: string
+          customer_id?: string
+          hold_expires_at?: string | null
+          id?: string
+          item_key?: string
+          item_name?: string
+          payment_id?: string | null
+          provider_order_id?: string | null
+          session_id?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+        }
+        Relationships: []
+      }
+      intake_answers: {
+        Row: {
+          answers: Json
+          booking_id: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          answers?: Json
+          booking_id: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          answers?: Json
+          booking_id?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "intake_answers_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: true
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      packages: {
+        Row: {
+          classes_remaining: number
+          created_at: string
+          customer_id: string
+          id: string
+          plan: string
+        }
+        Insert: {
+          classes_remaining?: number
+          created_at?: string
+          customer_id: string
+          id?: string
+          plan: string
+        }
+        Update: {
+          classes_remaining?: number
+          created_at?: string
+          customer_id?: string
+          id?: string
+          plan?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "packages_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sessions: {
+        Row: {
+          capacity: number
+          class_key: string
+          class_name: string
+          created_at: string
+          duration_min: number
+          id: string
+          mode: string
+          price_paise: number
+          starts_at: string
+        }
+        Insert: {
+          capacity?: number
+          class_key: string
+          class_name: string
+          created_at?: string
+          duration_min?: number
+          id?: string
+          mode?: string
+          price_paise: number
+          starts_at: string
+        }
+        Update: {
+          capacity?: number
+          class_key?: string
+          class_name?: string
+          created_at?: string
+          duration_min?: number
+          id?: string
+          mode?: string
+          price_paise?: number
+          starts_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      my_customer_ids: { Args: never; Returns: string[] }
+      request_cancel: { Args: { _booking_id: string }; Returns: undefined }
+      session_spots_taken: { Args: { _session_id: string }; Returns: number }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      booking_status:
+        | "held"
+        | "confirmed"
+        | "waitlisted"
+        | "cancel_requested"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +363,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      booking_status: [
+        "held",
+        "confirmed",
+        "waitlisted",
+        "cancel_requested",
+        "cancelled",
+      ],
+    },
   },
 } as const

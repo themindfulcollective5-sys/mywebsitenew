@@ -10,14 +10,31 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AwarenessRouteImport } from './routes/awareness'
+import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
 import { Route as EmployeeWellnessRouteImport } from './routes/employee-wellness'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RetreatsRouteImport } from './routes/retreats'
 import { Route as YatraRouteImport } from './routes/yatra'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedMyClassesRouteImport } from './routes/_authenticated/my-classes'
+import { Route as BookItemRouteImport } from './routes/book.$item'
+import { Route as BookingIdRouteImport } from './routes/booking.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AwarenessRoute = AwarenessRouteImport.update({
@@ -25,9 +42,19 @@ const AwarenessRoute = AwarenessRouteImport.update({
   path: '/awareness',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
+  id: '/cancellation-policy',
+  path: '/cancellation-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmployeeWellnessRoute = EmployeeWellnessRouteImport.update({
   id: '/employee-wellness',
   path: '/employee-wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RetreatsRoute = RetreatsRouteImport.update({
@@ -40,49 +67,129 @@ const YatraRoute = YatraRouteImport.update({
   path: '/yatra',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMyClassesRoute = AuthenticatedMyClassesRouteImport.update({
+  id: '/my-classes',
+  path: '/my-classes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const BookItemRoute = BookItemRouteImport.update({
+  id: '/book/$item',
+  path: '/book/$item',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingIdRoute = BookingIdRouteImport.update({
+  id: '/booking/$id',
+  path: '/booking/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/awareness': typeof AwarenessRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/my-classes': typeof AuthenticatedMyClassesRoute
+  '/book/$item': typeof BookItemRoute
+  '/booking/$id': typeof BookingIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/awareness': typeof AwarenessRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/my-classes': typeof AuthenticatedMyClassesRoute
+  '/book/$item': typeof BookItemRoute
+  '/booking/$id': typeof BookingIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/awareness': typeof AwarenessRoute
+  '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/my-classes': typeof AuthenticatedMyClassesRoute
+  '/book/$item': typeof BookItemRoute
+  '/booking/$id': typeof BookingIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/awareness' | '/employee-wellness' | '/retreats' | '/yatra'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/awareness'
+    | '/cancellation-policy'
+    | '/employee-wellness'
+    | '/privacy'
+    | '/retreats'
+    | '/yatra'
+    | '/admin'
+    | '/my-classes'
+    | '/book/$item'
+    | '/booking/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/awareness' | '/employee-wellness' | '/retreats' | '/yatra'
+  to:
+    | '/'
+    | '/auth'
+    | '/awareness'
+    | '/cancellation-policy'
+    | '/employee-wellness'
+    | '/privacy'
+    | '/retreats'
+    | '/yatra'
+    | '/admin'
+    | '/my-classes'
+    | '/book/$item'
+    | '/booking/$id'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/awareness'
+    | '/cancellation-policy'
     | '/employee-wellness'
+    | '/privacy'
     | '/retreats'
     | '/yatra'
+    | '/_authenticated/admin'
+    | '/_authenticated/my-classes'
+    | '/book/$item'
+    | '/booking/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   AwarenessRoute: typeof AwarenessRoute
+  CancellationPolicyRoute: typeof CancellationPolicyRoute
   EmployeeWellnessRoute: typeof EmployeeWellnessRoute
+  PrivacyRoute: typeof PrivacyRoute
   RetreatsRoute: typeof RetreatsRoute
   YatraRoute: typeof YatraRoute
+  BookItemRoute: typeof BookItemRoute
+  BookingIdRoute: typeof BookingIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -94,6 +201,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/awareness': {
       id: '/awareness'
       path: '/awareness'
@@ -101,11 +222,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AwarenessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cancellation-policy': {
+      id: '/cancellation-policy'
+      path: '/cancellation-policy'
+      fullPath: '/cancellation-policy'
+      preLoaderRoute: typeof CancellationPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/employee-wellness': {
       id: '/employee-wellness'
       path: '/employee-wellness'
       fullPath: '/employee-wellness'
       preLoaderRoute: typeof EmployeeWellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/retreats': {
@@ -122,15 +257,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YatraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/my-classes': {
+      id: '/_authenticated/my-classes'
+      path: '/my-classes'
+      fullPath: '/my-classes'
+      preLoaderRoute: typeof AuthenticatedMyClassesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/book/$item': {
+      id: '/book/$item'
+      path: '/book/$item'
+      fullPath: '/book/$item'
+      preLoaderRoute: typeof BookItemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/$id': {
+      id: '/booking/$id'
+      path: '/booking/$id'
+      fullPath: '/booking/$id'
+      preLoaderRoute: typeof BookingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedMyClassesRoute: typeof AuthenticatedMyClassesRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedMyClassesRoute: AuthenticatedMyClassesRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   AwarenessRoute: AwarenessRoute,
+  CancellationPolicyRoute: CancellationPolicyRoute,
   EmployeeWellnessRoute: EmployeeWellnessRoute,
+  PrivacyRoute: PrivacyRoute,
   RetreatsRoute: RetreatsRoute,
   YatraRoute: YatraRoute,
+  BookItemRoute: BookItemRoute,
+  BookingIdRoute: BookingIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

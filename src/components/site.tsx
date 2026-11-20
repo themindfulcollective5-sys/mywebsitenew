@@ -15,10 +15,13 @@ export function SiteHeader() {
     <header className="border-b border-hairline">
       <div className="mx-auto flex max-w-[860px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-4 md:flex-nowrap">
         <Link to="/" className="font-serif text-xl text-olive">{STUDIO_NAME}</Link>
-        <a href={waLink("Hello! I'd like to know more.")} target="_blank" rel="noreferrer"
-          className="pill border border-primary px-4 py-2 text-sm text-primary hover:bg-primary hover:text-primary-foreground md:order-3">
-          Message us
-        </a>
+        <div className="flex items-center gap-4 md:order-3">
+          <Link to="/my-classes" className="text-sm text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary">My classes</Link>
+          <a href={waLink("Hello! I'd like to know more.")} target="_blank" rel="noreferrer"
+            className="pill border border-primary px-4 py-2 text-sm text-primary hover:bg-primary hover:text-primary-foreground">
+            Message us
+          </a>
+        </div>
         <nav aria-label="Main" className="-mx-5 w-[calc(100%+2.5rem)] overflow-x-auto px-5 md:order-2 md:mx-0 md:w-auto md:px-0">
           <ul className="flex gap-5 whitespace-nowrap text-[0.9375rem]">
             {tabs.map((t) => (
@@ -88,7 +91,7 @@ export function Section(p: { id?: string | undefined; title: string; intro?: str
   );
 }
 
-export type Row = { title: string; desc?: string; right?: string; unit?: string; lead?: ReactNode; href?: string };
+export type Row = { title: string; desc?: string; right?: string; unit?: string; lead?: ReactNode; href?: string; book?: string };
 
 export function List({ rows }: { rows: Row[] }) {
   return (
@@ -107,6 +110,12 @@ export function List({ rows }: { rows: Row[] }) {
               <div className="shrink-0 text-right">
                 <p className="text-foreground">{r.right}</p>
                 {r.unit && <p className="text-xs text-muted-foreground">{r.unit}</p>}
+                {r.book && (
+                  <Link to="/book/$item" params={{ item: r.book }}
+                    className="mt-2 inline-block rounded-full border border-primary px-3 py-1 text-xs text-primary hover:bg-primary hover:text-primary-foreground">
+                    Reserve your spot
+                  </Link>
+                )}
               </div>
             )}
           </div>
@@ -185,7 +194,11 @@ export function Footer(p: { title: string; text: string; action: ReactNode; smal
         <p className="max-w-[60ch] opacity-85">{p.text}</p>
         <div className="pt-2">{p.action}</div>
         {p.small && <p className="text-sm opacity-75">{p.small}</p>}
-        <p className="pt-8 text-xs opacity-60">© {STUDIO_NAME}</p>
+        <p className="flex flex-wrap gap-x-5 gap-y-2 pt-8 text-xs opacity-75">
+          <span>© {STUDIO_NAME}</span>
+          <Link to="/cancellation-policy" className="underline underline-offset-4">Cancellation and refunds</Link>
+          <Link to="/privacy" className="underline underline-offset-4">Privacy</Link>
+        </p>
       </div>
     </footer>
   );

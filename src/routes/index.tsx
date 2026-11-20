@@ -23,20 +23,20 @@ function Classes() {
       ]} />
       <Section title="Classes and packages" intro="Drop in for a session, or commit to a rhythm.">
         <List rows={[
-          { title: "Beginner yoga", desc: "Hatha-based. Your first class, zero pressure.", right: "₹499", unit: ps },
-          { title: "Beginner, 2 days a week", desc: "8 to 10 classes a month.", right: "₹3,599", unit: "per month" },
-          { title: "Beginner, 3 days a week", desc: "12 to 15 classes a month.", right: "₹4,599", unit: "per month" },
-          { title: "Prenatal yoga", desc: "Move with your baby, not against it.", right: "₹699", unit: ps },
-          { title: "Postnatal yoga", desc: "Rebuild strength, one breath at a time.", right: "₹699", unit: ps },
-          { title: "Sound meditation", desc: "Every Sunday.", right: "₹899", unit: ps },
-          { title: "Sound meditation monthly", desc: "4 Sundays a month.", right: "₹3,499", unit: "per month" },
+          { title: "Beginner yoga", desc: "Hatha-based. Your first class, zero pressure.", right: "₹499", unit: ps, book: "beginner" },
+          { title: "Beginner, 2 days a week", desc: "8 to 10 classes a month.", right: "₹3,599", unit: "per month", book: "beginner-2x" },
+          { title: "Beginner, 3 days a week", desc: "12 to 15 classes a month.", right: "₹4,599", unit: "per month", book: "beginner-3x" },
+          { title: "Prenatal yoga", desc: "Move with your baby, not against it.", right: "₹699", unit: ps, book: "prenatal" },
+          { title: "Postnatal yoga", desc: "Rebuild strength, one breath at a time.", right: "₹699", unit: ps, book: "postnatal" },
+          { title: "Sound meditation", desc: "Every Sunday.", right: "₹899", unit: ps, book: "sound" },
+          { title: "Sound meditation monthly", desc: "4 Sundays a month.", right: "₹3,499", unit: "per month", book: "sound-monthly" },
         ]} />
       </Section>
       <Section title="Slow down, on your terms" intro="Weekend reset runs on Saturday and Sunday. Pick the sessions you want.">
         <List rows={[
-          { title: "Weekend reset", desc: "Yoga, Yin, Nidra ₹499 · Pranayama, Journaling ₹299.", right: "From ₹299", unit: ps },
-          { title: "The art of letting go", desc: "1.5 hours of Yin, sound meditation, and journaling.", right: "₹1,299", unit: ps },
-          { title: "Take it slow Friday", desc: "Yin yoga to close your week.", right: "₹499", unit: ps },
+          { title: "Weekend reset", desc: "Yoga, Yin, Nidra ₹499 · Pranayama, Journaling ₹299.", right: "From ₹299", unit: ps, book: "weekend-reset" },
+          { title: "The art of letting go", desc: "1.5 hours of Yin, sound meditation, and journaling.", right: "₹1,299", unit: ps, book: "letting-go" },
+          { title: "Take it slow Friday", desc: "Yin yoga to close your week.", right: "₹499", unit: ps, book: "slow-friday" },
         ]} />
       </Section>
       <Note><p className="font-serif text-xl">Not sure about a class?</p><p className="mt-1">Every class has a short, free talk explaining why it helps and what to expect. Open Awareness in the menu to watch.</p></Note>
