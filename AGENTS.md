@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Prices live only in `src/lib/catalog.ts`; server functions compute booking amounts from it, never from browser input.
+- Public booking writes go through `src/lib/booking.functions.ts` (server, admin client); customers read their own data via RLS matched on their signed-in email (`my_customer_ids()`).
+- Unpaid holds expire by time (`hold_expires_at`), counted live by `session_spots_taken`; no cleanup job needed.
+- WhatsApp sending lives in `src/lib/whatsapp.server.ts` and stays off until a provider key is added.
