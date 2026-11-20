@@ -10,33 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AwarenessRouteImport } from './routes/awareness'
+import { Route as EmployeeWellnessRouteImport } from './routes/employee-wellness'
+import { Route as RetreatsRouteImport } from './routes/retreats'
+import { Route as YatraRouteImport } from './routes/yatra'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AwarenessRoute = AwarenessRouteImport.update({
+  id: '/awareness',
+  path: '/awareness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmployeeWellnessRoute = EmployeeWellnessRouteImport.update({
+  id: '/employee-wellness',
+  path: '/employee-wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RetreatsRoute = RetreatsRouteImport.update({
+  id: '/retreats',
+  path: '/retreats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YatraRoute = YatraRouteImport.update({
+  id: '/yatra',
+  path: '/yatra',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/awareness': typeof AwarenessRoute
+  '/employee-wellness': typeof EmployeeWellnessRoute
+  '/retreats': typeof RetreatsRoute
+  '/yatra': typeof YatraRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/awareness': typeof AwarenessRoute
+  '/employee-wellness': typeof EmployeeWellnessRoute
+  '/retreats': typeof RetreatsRoute
+  '/yatra': typeof YatraRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/awareness': typeof AwarenessRoute
+  '/employee-wellness': typeof EmployeeWellnessRoute
+  '/retreats': typeof RetreatsRoute
+  '/yatra': typeof YatraRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/awareness' | '/employee-wellness' | '/retreats' | '/yatra'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/awareness' | '/employee-wellness' | '/retreats' | '/yatra'
+  id:
+    | '__root__'
+    | '/'
+    | '/awareness'
+    | '/employee-wellness'
+    | '/retreats'
+    | '/yatra'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AwarenessRoute: typeof AwarenessRoute
+  EmployeeWellnessRoute: typeof EmployeeWellnessRoute
+  RetreatsRoute: typeof RetreatsRoute
+  YatraRoute: typeof YatraRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +94,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/awareness': {
+      id: '/awareness'
+      path: '/awareness'
+      fullPath: '/awareness'
+      preLoaderRoute: typeof AwarenessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/employee-wellness': {
+      id: '/employee-wellness'
+      path: '/employee-wellness'
+      fullPath: '/employee-wellness'
+      preLoaderRoute: typeof EmployeeWellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/retreats': {
+      id: '/retreats'
+      path: '/retreats'
+      fullPath: '/retreats'
+      preLoaderRoute: typeof RetreatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yatra': {
+      id: '/yatra'
+      path: '/yatra'
+      fullPath: '/yatra'
+      preLoaderRoute: typeof YatraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AwarenessRoute: AwarenessRoute,
+  EmployeeWellnessRoute: EmployeeWellnessRoute,
+  RetreatsRoute: RetreatsRoute,
+  YatraRoute: YatraRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
