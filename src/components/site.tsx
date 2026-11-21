@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { STUDIO_NAME, waLink } from "@/config";
 
 const tabs = [
@@ -10,13 +11,46 @@ const tabs = [
   { to: "/yatra", label: "Yatra" },
 ] as const;
 
+const linkCls = "text-sm text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary";
+
 export function SiteHeader() {
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    const check = async (id: string | null) => {
+      if (!active) return;
+      setUserId(id);
+      if (!id) { setIsAdmin(false); return; }
+      const { data } = await supabase.from("user_roles").select("role").eq("user_id", id).eq("role", "admin").maybeSingle();
+      if (active) setIsAdmin(!!data);
+    };
+    supabase.auth.getSession().then(({ data }) => check(data.session?.user.id ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => { void check(session?.user.id ?? null); });
+    return () => { active = false; sub.subscription.unsubscribe(); };
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/", replace: true });
+  };
+
   return (
     <header className="border-b border-hairline">
       <div className="mx-auto flex max-w-[860px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-4 md:flex-nowrap">
         <Link to="/" className="font-serif text-xl text-olive">{STUDIO_NAME}</Link>
-        <div className="flex items-center gap-4 md:order-3">
-          <Link to="/my-classes" className="text-sm text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary">My classes</Link>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 md:order-3 md:flex-nowrap">
+          {userId ? (
+            <>
+              <Link to="/my-classes" className={linkCls}>My classes</Link>
+              {isAdmin && <Link to="/admin" className={linkCls}>Admin</Link>}
+              <button type="button" onClick={signOut} className={linkCls}>Sign out</button>
+            </>
+          ) : (
+            <Link to="/auth" className={linkCls}>Sign in</Link>
+          )}
           <a href={waLink("Hello! I'd like to know more.")} target="_blank" rel="noreferrer"
             className="pill border border-primary px-4 py-2 text-sm text-primary hover:bg-primary hover:text-primary-foreground">
             Message us
