@@ -4,8 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { STUDIO_NAME, waLink } from "@/config";
 
 const tabs = [
-  { to: "/", label: "Classes" },
   { to: "/awareness", label: "Awareness" },
+  { to: "/", label: "Classes" },
   { to: "/employee-wellness", label: "Employee wellness" },
   { to: "/retreats", label: "Retreats" },
   { to: "/yatra", label: "Yatra" },
