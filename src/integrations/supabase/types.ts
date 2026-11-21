@@ -227,6 +227,20 @@ export type Database = {
       }
       my_customer_ids: { Args: never; Returns: string[] }
       request_cancel: { Args: { _booking_id: string }; Returns: undefined }
+      reserve_booking: {
+        Args: {
+          _amount_paise: number
+          _customer_id: string
+          _hold_expires_at: string
+          _item_key: string
+          _item_name: string
+          _session_id: string
+        }
+        Returns: {
+          booking_id: string
+          booking_status: Database["public"]["Enums"]["booking_status"]
+        }[]
+      }
       session_spots_taken: { Args: { _session_id: string }; Returns: number }
     }
     Enums: {

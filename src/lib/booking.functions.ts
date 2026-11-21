@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 import { findItem } from "./catalog";
-import { decideStatus, holdExpiry, isHoldExpired } from "./booking-rules";
+import { holdExpiry, isHoldExpired, tooManyHolds } from "./booking-rules";
 
 function publicClient() {
   const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
@@ -61,18 +61,37 @@ export const createBooking = createServerFn({ method: "POST" })
     if (!item) throw new Error("This class is not available.");
     if (item.kind !== "general" && !data.answers.doctorCleared) throw new Error("Please confirm your doctor has cleared you.");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: session } = await supabaseAdmin.from("sessions").select("id, capacity, starts_at, class_key").eq("id", data.sessionId).maybeSingle();
+    const { data: session } = await supabaseAdmin.from("sessions").select("id, starts_at, class_key").eq("id", data.sessionId).maybeSingle();
     if (!session || session.class_key !== item.sessionKey || new Date(session.starts_at) <= new Date())
       throw new Error("That date is no longer available. Please choose another.");
-    const { data: customer, error: cErr } = await supabaseAdmin.from("customers")
-      .upsert({ email: data.email, name: data.name, phone: data.phone }, { onConflict: "email" }).select("id").single();
-    if (cErr || !customer) throw new Error("We couldn't save your details. Please try again.");
-    const { data: taken } = await supabaseAdmin.rpc("session_spots_taken", { _session_id: session.id });
-    const status = decideStatus(taken ?? 0, session.capacity);
-    const { data: booking, error: bErr } = await supabaseAdmin.from("bookings").insert({
-      session_id: session.id, customer_id: customer.id, item_key: item.key, item_name: item.name,
-      status, amount_paise: item.pricePaise, hold_expires_at: status === "held" ? holdExpiry(new Date()).toISOString() : null,
-    }).select("id").single();
+    const { data: existing } = await supabaseAdmin.from("customers").select("id").eq("email", data.email).maybeSingle();
+    let customerId = existing?.id;
+    if (!customerId) {
+      const { data: created, error: cErr } = await supabaseAdmin.from("customers")
+        .insert({ email: data.email, name: data.name, phone: data.phone }).select("id").single();
+      if (created) customerId = created.id;
+      else {
+        // Another request may have created it at the same moment.
+        const { data: again } = await supabaseAdmin.from("customers").select("id").eq("email", data.email).maybeSingle();
+        if (!again || (cErr && !again)) throw new Error("We couldn't save your details. Please try again.");
+        customerId = again.id;
+      }
+    }
+    const nowIso = new Date().toISOString();
+    const { data: sameEmailOrPhone } = await supabaseAdmin.from("customers").select("id")
+      .or(`email.eq.${JSON.stringify(data.email)},phone.eq.${JSON.stringify(data.phone)}`);
+    const ids = new Set((sameEmailOrPhone ?? []).map((c) => c.id));
+    ids.add(customerId);
+    const { data: holds } = await supabaseAdmin.from("bookings").select("customer_id, customers(email, phone)")
+      .in("customer_id", [...ids]).eq("status", "held").gt("hold_expires_at", nowIso);
+    const byEmail = (holds ?? []).filter((h) => h.customers?.email === data.email).length;
+    const byPhone = (holds ?? []).filter((h) => h.customers?.phone === data.phone).length;
+    if (tooManyHolds(byEmail, byPhone)) throw new Error("You already have bookings waiting for payment. Please finish or wait a few minutes.");
+    const { data: reserved, error: bErr } = await supabaseAdmin.rpc("reserve_booking", {
+      _session_id: session.id, _customer_id: customerId, _item_key: item.key, _item_name: item.name,
+      _amount_paise: item.pricePaise, _hold_expires_at: holdExpiry(new Date()).toISOString(),
+    });
+    const booking = reserved?.[0] ? { id: reserved[0].booking_id } : null;
     if (bErr || !booking) throw new Error("We couldn't reserve your spot. Please try again.");
     await supabaseAdmin.from("intake_answers").insert({ booking_id: booking.id, answers: data.answers });
     return { id: booking.id };

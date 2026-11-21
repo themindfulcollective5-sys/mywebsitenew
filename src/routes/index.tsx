@@ -16,8 +16,8 @@ function Classes() {
         caption="Photo: soft morning light, mats, a plant" />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
         { chip: "I can't sleep", name: "Yoga nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend reset" },
-        { chip: "My back feels stiff", name: "Yin yoga", desc: "Slow, gentle movement to ease tightness.", meta: "₹499 per session · Take it slow Friday" },
-        { chip: "I can't focus", name: "Pranayama", desc: "Breathwork to clear the fog.", meta: "₹299 per session · Weekend reset" },
+        { chip: "My back feels stiff", name: "Yin yoga", desc: "Slow, gentle movement at your own pace.", meta: "₹499 per session · Take it slow Friday" },
+        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "₹299 per session · Weekend reset" },
         { chip: "I overthink", name: "Journaling", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend reset" },
         { chip: "I feel anxious", name: "Sound meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
       ]} />

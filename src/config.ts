@@ -1,7 +1,7 @@
 // Edit these values to update the site.
 export const STUDIO_NAME = "TheMindfulCollective05";
 // WhatsApp number with country code, digits only (placeholder).
-export const WHATSAPP_NUMBER = "910000000000";
+export const WHATSAPP_NUMBER = "918072129409";
 export const waLink = (text: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 

@@ -15,6 +15,13 @@
       "when": 1795171419418,
       "tag": "0001_limit_public_sessions",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795276968727,
+      "tag": "0002_reserve_booking_function",
+      "breakpoints": true
     }
   ]
 }
