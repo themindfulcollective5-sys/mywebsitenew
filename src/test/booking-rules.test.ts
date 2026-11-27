@@ -25,6 +25,13 @@ describe("booking rules", () => {
   it("books Pranayama at ₹299 into weekend-reset sessions", () => {
     expect(findItem("pranayama")).toEqual({ key: "pranayama", name: "Pranayama", sessionKey: "weekend-reset", pricePaise: 29900, unit: "per session", kind: "general" });
   });
+  it("books Brain Dump (Journaling) at ₹299 into weekend-reset sessions", () => {
+    expect(findItem("journaling")).toEqual({ key: "journaling", name: "Brain Dump (Journaling)", sessionKey: "weekend-reset", pricePaise: 29900, unit: "per session", kind: "general" });
+  });
+  it("uses Title Case class names", () => {
+    expect(findItem("beginner")?.name).toBe("Beginner Hatha Yoga");
+    expect(findItem("letting-go")?.name).toBe("The Art of Letting Go");
+  });
   it("blocks a third unpaid hold for the same email or phone", () => {
     expect(tooManyHolds(2, 0)).toBe(true);
     expect(tooManyHolds(0, 2)).toBe(true);

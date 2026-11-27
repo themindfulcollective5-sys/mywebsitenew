@@ -9,13 +9,15 @@ export const Route = createFileRoute("/")({
   component: Classes,
 });
 
-const classes = [
-  { key: "beginner", label: "GROUP CLASS", desc: "Hatha-based. Your first class, zero pressure." },
-  { key: "pranayama", label: "BREATH", schedule: "Weekend", desc: "A steady breath to begin with." },
-  { key: "prenatal", label: "YOGA", desc: "Move with your baby, not against it." },
-  { key: "postnatal", label: "YOGA", desc: "Rebuild strength, one breath at a time." },
-  { key: "sound", label: "SOUND", schedule: "Every Sunday", desc: "Let sound settle you." },
-  { key: "slow-friday", label: "FRIDAY REST", schedule: "Fridays", desc: "Yin yoga to close your week." },
+type Tile = { key: string; label?: string; schedule?: string; duration?: string; q: string; title?: string; sub?: string };
+const classes: Tile[] = [
+  { key: "beginner", duration: "45 min", q: "What if your first class felt nothing like you feared?" },
+  { key: "pranayama", label: "BREATH", schedule: "Weekend", duration: "30 min", q: "Ever noticed how your breath changes when you're stressed?" },
+  { key: "prenatal", label: "YOGA", duration: "45 min", q: "You're caring for two. Who's caring for you?" },
+  { key: "postnatal", label: "YOGA", duration: "45 min", q: "Your body changed. When did you last feel at home in it?" },
+  { key: "sound", label: "SOUND", schedule: "Every Sunday", q: "When did your mind last go completely quiet?" },
+  { key: "slow-friday", label: "FRIDAY REST", schedule: "Fridays", duration: "45 min", q: "What if your week ended with rest, not rush?" },
+  { key: "journaling", label: "WEEKEND", title: "Brain Dump", sub: "(Journaling)", schedule: "Weekend", duration: "30 min", q: "Where do your thoughts go when they won't stop?" },
 ];
 function Classes() {
   return (<>
@@ -24,28 +26,33 @@ function Classes() {
         cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}
         caption="Photo: soft morning light, mats, a plant" />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
-        { chip: "I can't sleep", name: "Yoga nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend reset" },
-        { chip: "My back feels stiff", name: "Yin yoga", desc: "Slow, gentle movement at your own pace.", meta: "₹499 per session · Take it slow Friday" },
+        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend reset" },
+        { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "₹499 per session · Take It Slow Friday" },
         { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "₹299 per session · Weekend reset" },
-        { chip: "I overthink", name: "Journaling", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend reset" },
-        { chip: "I feel anxious", name: "Sound meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
+        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend reset" },
+        { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
       ]} />
       <Section title="Classes">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          {classes.map((c) => {
+          {classes.map((c, i) => {
             const item = findItem(c.key);
             if (!item) return null;
+            const last = i === classes.length - 1;
             return (
-              <article key={c.key} className="flex min-w-0 flex-col rounded-[1.5rem] border border-hairline p-5">
-                <p className="label text-primary uppercase">{c.label}</p>
-                <h3 className="mt-3 text-2xl">{item.name}</h3>
+              <article key={c.key} className={`flex min-w-0 flex-col rounded-[1.5rem] border border-hairline p-5${last ? " sm:col-span-2" : ""}`}>
+                {c.label && <p className="label text-primary uppercase">{c.label}</p>}
+                <h3 className={`${c.label ? "mt-3 " : ""}text-2xl`}>{c.title ?? item.name}</h3>
+                {c.sub && <p className="text-sm text-muted-foreground">{c.sub}</p>}
                 {c.schedule && <p className="mt-3 text-sm text-muted-foreground">{c.schedule}</p>}
-                <span className="mt-3 self-start rounded-full bg-clay px-3 py-1 text-xs text-clay-foreground">Online</span>
-                <p className="mt-4 text-[0.9375rem] text-muted-foreground">{c.desc}</p>
+                <p className="mt-4 font-serif text-lg italic text-olive">{c.q}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-clay px-3 py-1 text-xs text-clay-foreground">Online</span>
+                  {c.duration && <span className="rounded-full bg-clay px-3 py-1 text-xs text-clay-foreground">{c.duration}</span>}
+                </div>
                 <div className="mt-auto pt-6">
                   <p className="text-lg text-foreground">{rupees(item.pricePaise)} <span className="text-sm text-muted-foreground">{item.unit}</span></p>
                   <Button asChild className="pill mt-4 h-auto w-full rounded-full shadow-none">
-                    <Link to="/book/$item" params={{ item: item.key }} aria-label={`Book ${item.name}`}>Book</Link>
+                    <Link to="/book/$item" params={{ item: item.key }} aria-label={`Reserve your spot for ${item.name}`}>Reserve your spot</Link>
                   </Button>
                 </div>
               </article>
@@ -53,14 +60,18 @@ function Classes() {
           })}
         </div>
       </Section>
-      <Section title="Packages and special sessions">
+      <Section title="Save more with monthly plans" intro="Show up regularly, pay less per class.">
         <List rows={[
-          { title: "Beginner · Tuesday and Thursday", desc: "2 days a week · 8 to 10 classes a month", right: "₹3,599", unit: "per month", book: "beginner-2x" },
-          { title: "Beginner · Monday, Wednesday and Friday", desc: "3 days a week · 12 to 15 classes a month", right: "₹4,599", unit: "per month", book: "beginner-3x" },
-          { title: "Sound meditation · every Sunday", desc: "4 Sundays a month", right: "₹3,499", unit: "per month", book: "sound-monthly" },
-          { title: "Weekend reset · Saturday and Sunday", desc: "Pick your sessions: Yoga, Yin, Nidra ₹499 · Pranayama, Journaling ₹299", right: "₹499", unit: "per session", book: "weekend-reset" },
-          { title: "Yoga Nidra", desc: "Guided deep rest on the weekend", right: "₹499", unit: "per session", book: "nidra" },
-          { title: "The art of letting go", desc: "1.5 hours of Yin, sound meditation, and journaling", right: "₹1,299", unit: "per session", book: "letting-go" },
+          { title: "Beginner Hatha Yoga · Tuesday and Thursday", desc: "8 to 10 classes a month · save up to ₹1,391", right: "₹3,599", unit: "per month", book: "beginner-2x" },
+          { title: "Beginner Hatha Yoga · Monday, Wednesday and Friday", desc: "12 to 15 classes a month · best value, save up to ₹2,886", right: "₹4,599", unit: "per month", book: "beginner-3x" },
+          { title: "Sound Meditation · monthly", desc: "Every Sunday, 4 sessions a month · save ₹97", right: "₹3,499", unit: "per month", book: "sound-monthly" },
+        ]} />
+        <p className="text-sm text-muted-foreground">Savings are compared with booking single sessions.</p>
+      </Section>
+      <Section title="Special sessions" intro="Worth setting time aside for.">
+        <List rows={[
+          { title: "Yoga Nidra", desc: "When was the last time you truly rested? · 45 min · Weekend", right: "₹499", unit: "per session", book: "nidra" },
+          { title: "The Art of Letting Go", desc: "When did you last let go of something you've carried for years? · 1.5 hours", right: "₹1,299", unit: "per session", book: "letting-go" },
         ]} />
       </Section>
       <Note><p className="font-serif text-xl">Not sure about a class?</p><p className="mt-1">Every class has a short, free talk explaining why it helps and what to expect. Open Awareness in the menu to watch.</p></Note>
