@@ -26,10 +26,10 @@ function Classes() {
         cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}
         caption="Photo: soft morning light, mats, a plant" />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
-        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend reset" },
+        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend" },
         { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "₹499 per session · Take It Slow Friday" },
-        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "₹299 per session · Weekend reset" },
-        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend reset" },
+        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "₹299 per session · Weekend" },
+        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend" },
         { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
       ]} />
       <Section title="Classes">
