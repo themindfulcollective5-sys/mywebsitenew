@@ -11,11 +11,11 @@ export const Route = createFileRoute("/")({
 
 type Tile = { key: string; label?: string; schedule?: string; duration?: string; q: string; title?: string; sub?: string };
 const classes: Tile[] = [
-  { key: "beginner", duration: "45 min", q: "What if your first class felt nothing like you feared?" },
+  { key: "beginner", label: "YOGA", duration: "45 min", q: "What if your first class felt nothing like you feared?" },
   { key: "pranayama", label: "BREATH", schedule: "Weekend", duration: "30 min", q: "Ever noticed how your breath changes when you're stressed?" },
   { key: "prenatal", label: "YOGA", duration: "45 min", q: "You're caring for two. Who's caring for you?" },
   { key: "postnatal", label: "YOGA", duration: "45 min", q: "Your body changed. When did you last feel at home in it?" },
-  { key: "sound", label: "SOUND", schedule: "Every Sunday", q: "When did your mind last go completely quiet?" },
+  { key: "sound", label: "SOUND", schedule: "Every Sunday", duration: "45 min", q: "When did your mind last go completely quiet?" },
   { key: "slow-friday", label: "FRIDAY REST", schedule: "Fridays", duration: "45 min", q: "What if your week ended with rest, not rush?" },
   { key: "journaling", label: "WEEKEND", title: "Brain Dump", sub: "(Journaling)", schedule: "Weekend", duration: "30 min", q: "Where do your thoughts go when they won't stop?" },
 ];
@@ -26,11 +26,11 @@ function Classes() {
         cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}
         caption="Photo: soft morning light, mats, a plant" />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
-        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "₹499 per session · Weekend" },
-        { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "₹499 per session · Take It Slow Friday" },
-        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "₹299 per session · Weekend" },
-        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "₹299 per session · Weekend" },
-        { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
+        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "Weekend" },
+        { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "Take It Slow Friday · Fridays" },
+        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "Weekend" },
+        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "Weekend" },
+        { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you.", meta: "Every Sunday" },
       ]} />
       <Section title="Classes">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -60,15 +60,14 @@ function Classes() {
           })}
         </div>
       </Section>
-      <Section title="Save more with monthly plans" intro="Show up regularly, pay less per class.">
+      <Section title="Find your rhythm" intro="Choose the days that fit your week.">
         <List rows={[
-          { title: "Beginner Hatha Yoga · Tuesday and Thursday", desc: "8 to 10 classes a month · save up to ₹1,391", right: "₹3,599", unit: "per month", book: "beginner-2x" },
-          { title: "Beginner Hatha Yoga · Monday, Wednesday and Friday", desc: "12 to 15 classes a month · best value, save up to ₹2,886", right: "₹4,599", unit: "per month", book: "beginner-3x" },
-          { title: "Sound Meditation · monthly", desc: "Every Sunday, 4 sessions a month · save ₹97", right: "₹3,499", unit: "per month", book: "sound-monthly" },
+          { title: "Beginner Hatha Yoga · Tuesday and Thursday", desc: "8 to 10 classes a month", right: "₹3,599", unit: "per month", book: "beginner-2x" },
+          { title: "Beginner Hatha Yoga · Monday, Wednesday and Friday", desc: "12 to 15 classes a month", right: "₹4,599", unit: "per month", book: "beginner-3x" },
+          { title: "Sound Meditation · monthly", desc: "Every Sunday, 4 sessions a month", right: "₹3,499", unit: "per month", book: "sound-monthly" },
         ]} />
-        <p className="text-sm text-muted-foreground">Savings are compared with booking single sessions.</p>
       </Section>
-      <Section title="Special sessions" intro="Worth setting time aside for.">
+      <Section title="Go deeper" intro="Sessions to look forward to.">
         <List rows={[
           { title: "Yoga Nidra", desc: "When was the last time you truly rested? · 45 min · Weekend", right: "₹499", unit: "per session", book: "nidra" },
           { title: "The Art of Letting Go", desc: "When did you last let go of something you've carried for years? · 1.5 hours", right: "₹1,299", unit: "per session", book: "letting-go" },
