@@ -120,7 +120,7 @@ function Admin() {
 const toLocal = (iso: string) => { const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); };
 
 function SessionForm({ s, onDone }: { s: S | null; onDone: () => void }) {
-  const [v, setV] = useState({ class_key: s?.class_key ?? "beginner", starts_at: s ? toLocal(s.starts_at) : "", duration_min: s?.duration_min ?? 60, capacity: s?.capacity ?? 10, mode: s?.mode ?? "Online and offline" });
+  const [v, setV] = useState({ class_key: s?.class_key ?? "beginner", starts_at: s ? toLocal(s.starts_at) : "", duration_min: s?.duration_min ?? 60, capacity: s?.capacity ?? 10, mode: s?.mode ?? "Online" });
   const [err, setErr] = useState("");
   async function save(e: React.FormEvent) {
     e.preventDefault(); setErr("");

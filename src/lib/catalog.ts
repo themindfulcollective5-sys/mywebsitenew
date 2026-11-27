@@ -19,6 +19,8 @@ export const CATALOG: CatalogItem[] = [
   { key: "sound", name: "Sound meditation", sessionKey: "sound", pricePaise: 89900, unit: "per session", kind: "general" },
   { key: "sound-monthly", name: "Sound meditation monthly", sessionKey: "sound", pricePaise: 349900, unit: "per month", kind: "general" },
   { key: "weekend-reset", name: "Weekend reset", sessionKey: "weekend-reset", pricePaise: 49900, unit: "per session", kind: "general" },
+  { key: "nidra", name: "Yoga Nidra", sessionKey: "weekend-reset", pricePaise: 49900, unit: "per session", kind: "general" },
+  { key: "pranayama", name: "Pranayama", sessionKey: "weekend-reset", pricePaise: 29900, unit: "per session", kind: "general" },
   { key: "letting-go", name: "The art of letting go", sessionKey: "letting-go", pricePaise: 129900, unit: "per session", kind: "general" },
   { key: "slow-friday", name: "Take it slow Friday", sessionKey: "slow-friday", pricePaise: 49900, unit: "per session", kind: "general" },
 ];

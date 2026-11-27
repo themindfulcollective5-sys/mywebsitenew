@@ -19,6 +19,12 @@ describe("booking rules", () => {
     expect(findItem("beginner-2x")?.pricePaise).toBe(359900);
     expect(findItem("sound")?.pricePaise).toBe(89900);
   });
+  it("books Yoga Nidra at ₹499 into weekend-reset sessions", () => {
+    expect(findItem("nidra")).toEqual({ key: "nidra", name: "Yoga Nidra", sessionKey: "weekend-reset", pricePaise: 49900, unit: "per session", kind: "general" });
+  });
+  it("books Pranayama at ₹299 into weekend-reset sessions", () => {
+    expect(findItem("pranayama")).toEqual({ key: "pranayama", name: "Pranayama", sessionKey: "weekend-reset", pricePaise: 29900, unit: "per session", kind: "general" });
+  });
   it("blocks a third unpaid hold for the same email or phone", () => {
     expect(tooManyHolds(2, 0)).toBe(true);
     expect(tooManyHolds(0, 2)).toBe(true);
