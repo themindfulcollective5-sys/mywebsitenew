@@ -9,6 +9,7 @@ const tabs = [
   { to: "/employee-wellness", label: "Employee wellness" },
   { to: "/retreats", label: "Retreats" },
   { to: "/yatra", label: "Yatra" },
+  { to: "/guide", label: "Your Guide" },
 ] as const;
 
 const linkCls = "text-sm text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary";

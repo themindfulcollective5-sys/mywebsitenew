@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AwarenessRouteImport } from './routes/awareness'
 import { Route as CancellationPolicyRouteImport } from './routes/cancellation-policy'
 import { Route as EmployeeWellnessRouteImport } from './routes/employee-wellness'
+import { Route as GuideRouteImport } from './routes/guide'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RetreatsRouteImport } from './routes/retreats'
 import { Route as YatraRouteImport } from './routes/yatra'
@@ -50,6 +51,11 @@ const CancellationPolicyRoute = CancellationPolicyRouteImport.update({
 const EmployeeWellnessRoute = EmployeeWellnessRouteImport.update({
   id: '/employee-wellness',
   path: '/employee-wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/awareness': typeof AwarenessRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/guide': typeof GuideRoute
   '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/awareness': typeof AwarenessRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/guide': typeof GuideRoute
   '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/awareness': typeof AwarenessRoute
   '/cancellation-policy': typeof CancellationPolicyRoute
   '/employee-wellness': typeof EmployeeWellnessRoute
+  '/guide': typeof GuideRoute
   '/privacy': typeof PrivacyRoute
   '/retreats': typeof RetreatsRoute
   '/yatra': typeof YatraRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/awareness'
     | '/cancellation-policy'
     | '/employee-wellness'
+    | '/guide'
     | '/privacy'
     | '/retreats'
     | '/yatra'
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/awareness'
     | '/cancellation-policy'
     | '/employee-wellness'
+    | '/guide'
     | '/privacy'
     | '/retreats'
     | '/yatra'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/awareness'
     | '/cancellation-policy'
     | '/employee-wellness'
+    | '/guide'
     | '/privacy'
     | '/retreats'
     | '/yatra'
@@ -185,6 +197,7 @@ export interface RootRouteChildren {
   AwarenessRoute: typeof AwarenessRoute
   CancellationPolicyRoute: typeof CancellationPolicyRoute
   EmployeeWellnessRoute: typeof EmployeeWellnessRoute
+  GuideRoute: typeof GuideRoute
   PrivacyRoute: typeof PrivacyRoute
   RetreatsRoute: typeof RetreatsRoute
   YatraRoute: typeof YatraRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/employee-wellness'
       fullPath: '/employee-wellness'
       preLoaderRoute: typeof EmployeeWellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   AwarenessRoute: AwarenessRoute,
   CancellationPolicyRoute: CancellationPolicyRoute,
   EmployeeWellnessRoute: EmployeeWellnessRoute,
+  GuideRoute: GuideRoute,
   PrivacyRoute: PrivacyRoute,
   RetreatsRoute: RetreatsRoute,
   YatraRoute: YatraRoute,

@@ -34,3 +34,5 @@ use the editor.
 - Public booking writes go through `src/lib/booking.functions.ts` (server, admin client); customers read their own data via RLS matched on their signed-in email (`my_customer_ids()`).
 - Unpaid holds expire by time (`hold_expires_at`), counted live by `session_spots_taken`; no cleanup job needed.
 - WhatsApp sending lives in `src/lib/whatsapp.server.ts` and stays off until a provider key is added.
+- Classes uses a local row renderer for schedule accents; keep shared List unchanged so other pages retain their presentation.
+- The guide lives at `/guide` and reuses shared teacher and contact components to keep its presentation consistent with the studio.
