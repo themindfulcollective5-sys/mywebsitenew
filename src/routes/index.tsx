@@ -10,15 +10,12 @@ export const Route = createFileRoute("/")({
 });
 
 const classes = [
-  { key: "beginner", label: "NEW BATCH", schedule: "Mon · Wed · Fri · 6:15 am to 7:15 am", desc: "Hatha-based. Your first class, zero pressure." },
+  { key: "beginner", label: "GROUP CLASS", schedule: "6:15 am to 7:15 am", desc: "Hatha-based. Your first class, zero pressure." },
   { key: "prenatal", label: "YOGA", desc: "Move with your baby, not against it." },
   { key: "postnatal", label: "YOGA", desc: "Rebuild strength, one breath at a time." },
   { key: "sound", label: "SOUND", schedule: "Every Sunday", desc: "Let sound settle you." },
   { key: "slow-friday", label: "FRIDAY REST", schedule: "Fridays", desc: "Yin yoga to close your week." },
   { key: "weekend-reset", label: "WEEKEND RESET", schedule: "Saturday and Sunday", desc: "Yoga, Yin, Nidra ₹499 · Pranayama, Journaling ₹299." },
-  { key: "nidra", label: "DEEP REST", schedule: "Weekend", desc: "Deep rest, even when your mind won't stop." },
-  { key: "pranayama", label: "BREATH", schedule: "Weekend", desc: "A steady breath to begin with." },
-  { key: "letting-go", label: "YIN · SOUND · JOURNALING", desc: "1.5 hours of Yin, sound meditation, and journaling." },
 ];
 function Classes() {
   return (<>
@@ -34,11 +31,10 @@ function Classes() {
         { chip: "I feel anxious", name: "Sound meditation", desc: "Let sound settle you.", meta: "₹899 per session · Every Sunday" },
       ]} />
       <Section title="Classes">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {classes.map((c) => {
             const item = findItem(c.key);
             if (!item) return null;
-            const fromPrice = c.key === "weekend-reset" ? findItem("pranayama") : null;
             return (
               <article key={c.key} className="flex min-w-0 flex-col rounded-[1.5rem] border border-hairline p-5">
                 <p className="label text-primary uppercase">{c.label}</p>
@@ -47,21 +43,28 @@ function Classes() {
                 <span className="mt-3 self-start rounded-full bg-clay px-3 py-1 text-xs text-clay-foreground">Online</span>
                 <p className="mt-4 text-[0.9375rem] text-muted-foreground">{c.desc}</p>
                 <div className="mt-auto pt-6">
-                  <p className="text-lg text-foreground">{fromPrice ? `From ${rupees(fromPrice.pricePaise)}` : rupees(item.pricePaise)} <span className="text-sm text-muted-foreground">{item.unit}</span></p>
+                  <p className="text-lg text-foreground">{rupees(item.pricePaise)} <span className="text-sm text-muted-foreground">{item.unit}</span></p>
                   <Button asChild className="pill mt-4 h-auto w-full rounded-full shadow-none">
                     <Link to="/book/$item" params={{ item: item.key }} aria-label={`Book ${item.name}`}>Book</Link>
                   </Button>
+                  {c.key === "weekend-reset" && (
+                    <div className="mt-3 flex flex-col items-start gap-2 text-sm">
+                      <Link to="/book/$item" params={{ item: "nidra" }} className="text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary">Book Yoga Nidra only</Link>
+                      <Link to="/book/$item" params={{ item: "pranayama" }} className="text-olive underline decoration-hairline underline-offset-4 hover:decoration-primary">Book Pranayama only, ₹299</Link>
+                    </div>
+                  )}
                 </div>
               </article>
             );
           })}
         </div>
       </Section>
-      <Section title="Monthly packages">
+      <Section title="Packages and special sessions">
         <List rows={[
-          { title: "Beginner, 2 days a week", desc: "8 to 10 classes a month.", right: "₹3,599", unit: "per month", book: "beginner-2x" },
-          { title: "Beginner, 3 days a week", desc: "12 to 15 classes a month.", right: "₹4,599", unit: "per month", book: "beginner-3x" },
-          { title: "Sound meditation monthly", desc: "4 Sundays a month.", right: "₹3,499", unit: "per month", book: "sound-monthly" },
+          { title: "Beginner, 2 days a week", desc: "Tuesday and Thursday · 8 to 10 classes a month.", right: "₹3,599", unit: "per month", book: "beginner-2x" },
+          { title: "Beginner, 3 days a week", desc: "Monday, Wednesday and Friday · 12 to 15 classes a month.", right: "₹4,599", unit: "per month", book: "beginner-3x" },
+          { title: "Sound meditation monthly", desc: "Every Sunday · 4 Sundays a month.", right: "₹3,499", unit: "per month", book: "sound-monthly" },
+          { title: "The art of letting go", desc: "1.5 hours of Yin, sound meditation, and journaling.", right: "₹1,299", unit: "per session", book: "letting-go" },
         ]} />
       </Section>
       <Note><p className="font-serif text-xl">Not sure about a class?</p><p className="mt-1">Every class has a short, free talk explaining why it helps and what to expect. Open Awareness in the menu to watch.</p></Note>
