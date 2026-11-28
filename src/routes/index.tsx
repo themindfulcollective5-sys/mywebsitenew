@@ -108,7 +108,6 @@ function Classes() {
       </Section>
     </Page>
     <Footer title="There is always a place for you on the mat." text="Message us the class you would like, whenever you are ready."
-      action={<FooterButton href={waLink("Hello! I'd like to join a class.")}>Message on WhatsApp</FooterButton>}
-      small="Online" />
+      action={<FooterButton href={waLink("Hello! I'd like to join a class.")}>Message on WhatsApp</FooterButton>} />
   </>);
 }

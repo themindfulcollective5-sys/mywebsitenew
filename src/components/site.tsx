@@ -209,7 +209,7 @@ export const Note = ({ children }: { children: ReactNode }) => (
 
 export function Teacher({ bio }: { bio: string }) {
   return (
-    <section className="flex flex-col gap-6 border-t border-hairline pt-12 sm:flex-row sm:items-start">
+    <section className="flex flex-col gap-6 sm:flex-row sm:items-start">
       <div className="space-y-2">
         <h2 className="text-[28px]">Azhakeswari</h2>
         <p className="label text-muted-foreground">Yoga and sound meditation teacher · 6 years of experience</p>
@@ -219,14 +219,13 @@ export function Teacher({ bio }: { bio: string }) {
   );
 }
 
-export function Footer(p: { title: string; text: string; action: ReactNode; small?: string }) {
+export function Footer(p: { title: string; text: string; action: ReactNode }) {
   return (
     <footer className="bg-footer text-footer-foreground">
       <div className="mx-auto max-w-[860px] space-y-5 px-5 py-16">
         <h2 className="max-w-[20ch] text-[30px] !text-footer-foreground md:text-[40px]">{p.title}</h2>
         <p className="max-w-[60ch] opacity-85">{p.text}</p>
         <div className="pt-2">{p.action}</div>
-        {p.small && <p className="text-sm opacity-75">{p.small}</p>}
         <p className="flex flex-wrap gap-x-5 gap-y-2 pt-8 text-xs opacity-75">
           <span>© {STUDIO_NAME}</span>
           <Link to="/cancellation-policy" className="underline underline-offset-4">Cancellation and refunds</Link>
