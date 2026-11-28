@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Page, Section, Note, Teacher, PhotoPlaceholder, PrimaryButton, Footer, FooterButton, meta } from "@/components/site";
+import { Page, Section, Note, Teacher, PrimaryButton, Footer, FooterButton, meta } from "@/components/site";
 import { telLink, waLink } from "@/config";
 
 export const Route = createFileRoute("/guide")({
@@ -27,7 +27,6 @@ function Guide() {
       </Section>
       <div className="space-y-8">
         <Teacher bio="I came to yoga when work stress was taking over my days. Slowly, my focus sharpened, my sleep deepened, and I felt calmer in my own skin. Now I teach small, friendly classes where you only have to show up." />
-        <PhotoPlaceholder caption="Photo: [your photo]" />
       </div>
     </Page>
     <Footer title="Let's find your starting point together." text="A personal conversation, wherever you are."

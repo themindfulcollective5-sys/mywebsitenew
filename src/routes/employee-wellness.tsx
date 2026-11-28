@@ -13,8 +13,7 @@ function Wellness() {
   return (<>
     <Page>
       <Hero label="Employee wellness" title="Wellbeing at work" text="Calm, focus, and energy for your team, through yoga, breathwork, and sound meditation."
-        cta={<PrimaryButton href={pilot} external>Request a pilot session</PrimaryButton>} link={<TextLink href="#sessions">See sessions</TextLink>}
-        caption="Photo: a team stretching together in a bright office" />
+        cta={<PrimaryButton href={pilot} external>Request a pilot session</PrimaryButton>} link={<TextLink href="#sessions">See sessions</TextLink>}  />
       <Finder title="What does your team need?" intro="Choose one, and we will suggest a session." options={[
         { chip: "Stress", name: "Desk yoga and stress relief", desc: "Release tension without leaving the desk.", meta: "₹6,000 to ₹8,000 per session · 45 min · online" },
         { chip: "Focus", name: "Pranayama focus break", desc: "A short breathwork reset for sharper attention.", meta: "₹4,000 to ₹6,000 per session · 30 min" },

@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Page, Hero, PrimaryButton, TextLink, Finder, Section, List, Note, Teacher, Footer, EmailForm, PlayIcon, meta } from "@/components/site";
-import { TALK_URLS } from "@/config";
 
 export const Route = createFileRoute("/awareness")({
   head: () => meta("Awareness", "Free recorded talks on why movement, breath, and rest matter."),
@@ -12,8 +11,7 @@ function Awareness() {
   return (<>
     <Page>
       <Hero label="Awareness sessions" title="Understand it first, then begin" text="Short recorded talks on why movement, breath, and rest matter. Free, and yours to watch anytime."
-        cta={<PrimaryButton href="#talks">Start with a talk</PrimaryButton>} link={<TextLink href="#topic">Browse by topic</TextLink>}
-        caption="Photo: a notebook, a cup of tea, a laptop playing a talk" />
+        cta={<PrimaryButton href="#talks">Start with a talk</PrimaryButton>} link={<TextLink href="#topic">Browse by topic</TextLink>}  />
       <Finder id="topic" title="What would you like to understand?" intro="Choose a topic, and we will suggest a talk." options={[
         { chip: "Everyday wellness", name: "Why wellness matters every day", desc: "Small habits, big difference.", meta: f },
         { chip: "Pregnancy", name: "Pregnancy awareness", desc: "What to know before, during, and after.", meta: f },
@@ -23,11 +21,11 @@ function Awareness() {
       ]} />
       <Section id="talks" title="All recorded talks" intro="Free to watch on YouTube.">
         <List rows={[
-          { title: "Why wellness matters every day", desc: "Small habits, big difference", href: TALK_URLS.wellness },
-          { title: "Pregnancy awareness", desc: "What to know before, during, and after", href: TALK_URLS.pregnancy },
-          { title: "Why Yin Yoga?", desc: "Hold less, release more", href: TALK_URLS.yin },
-          { title: "Why Hatha Yoga?", desc: "The foundation of every practice", href: TALK_URLS.hatha },
-          { title: "Why Pranayama?", desc: "Change how you feel in five minutes", href: TALK_URLS.pranayama },
+          { title: "Why wellness matters every day", desc: "Small habits, big difference" },
+          { title: "Pregnancy awareness", desc: "What to know before, during, and after" },
+          { title: "Why Yin Yoga?", desc: "Hold less, release more" },
+          { title: "Why Hatha Yoga?", desc: "The foundation of every practice" },
+          { title: "Why Pranayama?", desc: "Change how you feel in five minutes" },
         ].map((r) => ({ ...r, lead: <PlayIcon />, right: "Free · recorded" }))} />
       </Section>
       <Section title="More on the way" intro="Topics we plan to add next.">

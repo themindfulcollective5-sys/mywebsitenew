@@ -17,7 +17,7 @@ const classes: Tile[] = [
   { key: "postnatal", label: "YOGA", duration: "45 min", q: "Your body changed. When did you last feel at home in it?" },
   { key: "sound", label: "SOUND", schedule: "Every Sunday", duration: "45 min", q: "When did your mind last go completely quiet?" },
   { key: "slow-friday", label: "FRIDAY REST", schedule: "Fridays", duration: "45 min", q: "What if your week ended with rest, not rush?" },
-  { key: "journaling", label: "WEEKEND", title: "Brain Dump", sub: "(Journaling)", schedule: "Weekend", duration: "30 min", q: "Where do your thoughts go when they won't stop?" },
+  { key: "journaling", label: "WEEKEND", title: "Brain Dump", sub: "(Journaling)", duration: "30 min", q: "Where do your thoughts go when they won't stop?" },
 ];
 type ClassRow = { title: string; second: string; desc: string; right: string; unit: string; book: string };
 
@@ -50,8 +50,7 @@ function Classes() {
   return (<>
     <Page>
       <Hero label="Yoga · Breath · Sound" title="Find your pace, find your calm" text="Small-group classes for every body and every mood."
-        cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}
-        caption="Photo: soft morning light, mats, a plant" />
+        cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}  />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
         { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "Weekend" },
         { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "Take It Slow Friday · Fridays" },
@@ -110,6 +109,6 @@ function Classes() {
     </Page>
     <Footer title="There is always a place for you on the mat." text="Message us the class you would like, whenever you are ready."
       action={<FooterButton href={waLink("Hello! I'd like to join a class.")}>Message on WhatsApp</FooterButton>}
-      small="6:15 am to 7:15 am · Online" />
+      small="Online" />
   </>);
 }

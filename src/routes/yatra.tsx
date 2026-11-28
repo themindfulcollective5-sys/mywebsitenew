@@ -12,8 +12,7 @@ function Yatra() {
   return (<>
     <Page>
       <Hero label="Yatra · Mindful travel" title="Travel slowly, arrive within" text="Small-group journeys to sacred places, with daily practice and time to simply be."
-        cta={<PrimaryButton href={ask} external>Ask about the next Yatra</PrimaryButton>} link={<TextLink href="#journey">What to expect</TextLink>}
-        caption="Photo: temple steps or a riverbank at dawn" />
+        cta={<PrimaryButton href={ask} external>Ask about the next Yatra</PrimaryButton>} link={<TextLink href="#journey">What to expect</TextLink>}  />
       <Section id="journey" title="What to expect" intro="Every Yatra keeps the pace gentle and the group small.">
         <List rows={[
           { title: "Daily practice", desc: "Morning yoga and pranayama wherever we are." },

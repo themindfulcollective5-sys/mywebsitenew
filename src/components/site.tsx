@@ -8,7 +8,6 @@ const tabs = [
   { to: "/", label: "Classes" },
   { to: "/employee-wellness", label: "Employee wellness" },
   { to: "/retreats", label: "Retreats" },
-  { to: "/yatra", label: "Yatra" },
   { to: "/guide", label: "Your Guide" },
 ] as const;
 
@@ -79,7 +78,7 @@ export function Page({ children }: { children: ReactNode }) {
   return <main className="mx-auto max-w-[860px] space-y-16 px-5 pt-12 pb-16 md:space-y-20 md:pt-16">{children}</main>;
 }
 
-export function Hero(p: { label: string; title: string; text: string; cta: ReactNode; link: ReactNode; caption: string }) {
+export function Hero(p: { label: string; title: string; text: string; cta: ReactNode; link: ReactNode; caption?: string }) {
   return (
     <section className="space-y-8">
       <div className="max-w-[640px] space-y-5">
@@ -91,7 +90,6 @@ export function Hero(p: { label: string; title: string; text: string; cta: React
           {p.link}
         </div>
       </div>
-      <PhotoPlaceholder caption={p.caption} />
     </section>
   );
 }
@@ -211,7 +209,6 @@ export const Note = ({ children }: { children: ReactNode }) => (
 export function Teacher({ bio }: { bio: string }) {
   return (
     <section className="flex flex-col gap-6 border-t border-hairline pt-12 sm:flex-row sm:items-start">
-      <div className="photo-placeholder size-28 shrink-0 rounded-full" role="img" aria-label="Photo of Azhakeswari to add" />
       <div className="space-y-2">
         <h2 className="text-[28px]">Azhakeswari</h2>
         <p className="label text-muted-foreground">Yoga and sound meditation teacher · 6 years of experience</p>
