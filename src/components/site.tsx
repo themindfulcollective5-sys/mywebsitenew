@@ -8,6 +8,7 @@ const tabs = [
   { to: "/", label: "Classes" },
   { to: "/employee-wellness", label: "Employee wellness" },
   { to: "/retreats", label: "Retreats" },
+  { to: "/yatra", label: "Yatra" },
   { to: "/guide", label: "Your Guide" },
 ] as const;
 
@@ -172,7 +173,7 @@ export const Num = ({ n }: { n: number }) => (
   <span aria-hidden className="mt-0.5 font-serif text-lg text-primary">{n}</span>
 );
 
-export type FinderOption = { chip: string; name: string; desc: string; meta: string };
+export type FinderOption = { chip: string; name: string; desc: string; meta?: string };
 
 export function Finder({ id, title, intro, options }: { id?: string; title: string; intro: string; options: FinderOption[] }) {
   const [sel, setSel] = useState<number | null>(null);
@@ -194,7 +195,7 @@ export function Finder({ id, title, intro, options }: { id?: string; title: stri
             <p className="label text-primary">Try</p>
             <p className="font-serif text-2xl text-olive">{s.name}</p>
             <p className="text-muted-foreground">{s.desc}</p>
-            <p className="mt-1 text-sm text-foreground">{s.meta}</p>
+            {s.meta && <p className="mt-1 text-sm text-foreground">{s.meta}</p>}
           </div>
         )}
       </div>

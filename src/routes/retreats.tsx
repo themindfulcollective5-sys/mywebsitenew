@@ -11,7 +11,7 @@ function Retreats() {
   return (<>
     <Page>
       <Hero label="Retreats" title="A few days to slow all the way down" text="Small-group retreats that bring yoga, sound meditation, and journaling together, away from the usual noise."
-        cta={<PrimaryButton href="#join">Join the interest list</PrimaryButton>} link={<TextLink href="#day">See a sample day</TextLink>}  />
+        cta={<PrimaryButton href="#join">Keep me posted</PrimaryButton>} link={<TextLink href="#day">See a sample day</TextLink>}  />
       <Section title="At a glance">
         <dl className="grid grid-cols-2 border-t border-l border-hairline">
           {glance.map(([k, v]) => (
@@ -39,6 +39,6 @@ function Retreats() {
       </Section>
       <Teacher bio="Retreats are where the practice can really sink in. I keep groups small so everyone gets space, quiet, and attention." />
     </Page>
-    <div id="join"><Footer title="Be the first to know" text="Leave your email and we will share dates and details first." action={<EmailForm button="Join the interest list" />} /></div>
+    <div id="join"><Footer title="Want to be there?" text="Leave your email and I'll send you the dates and details before anyone else." action={<EmailForm button="Keep me posted" />} /></div>
   </>);
 }

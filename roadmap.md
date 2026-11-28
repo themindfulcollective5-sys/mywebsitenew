@@ -1,5 +1,10 @@
 - [ ] Yatra page content (waiting on user)
 - [ ] Real WhatsApp number (waiting on user)
+## Copy, layout and navigation fixes
+- [x] Restore Yatra navigation and remove Classes Finder schedules
+- [x] Update Guide order, Awareness questions, Retreats wording, and wellness footer
+- [x] Verify tests and page navigation on mobile
+
 ## Classes and Your Guide updates
 - [x] Update Classes schedule, monthly rows, Me Time rows, and guide teaser
 - [x] Add Your Guide page, phone link, and final header tab

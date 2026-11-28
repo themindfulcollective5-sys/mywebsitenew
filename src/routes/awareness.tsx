@@ -28,8 +28,8 @@ function Awareness() {
           { title: "Why Pranayama?", desc: "Change how you feel in five minutes" },
         ].map((r) => ({ ...r, lead: <PlayIcon />, right: "Free · recorded" }))} />
       </Section>
-      <Section title="More on the way" intro="Topics we plan to add next.">
-        <List rows={["Sleep", "Back pain and posture", "Focus and overthinking", "Anxiety and the breath"].map((t) => ({ title: t, right: "Coming soon" }))} />
+      <Section title="What should we talk about next?" intro="These are coming soon. Tell us which one you need most.">
+        <List rows={["Why can't I sleep?", "Why does my back always feel stiff?", "Why can't I stop overthinking?", "What does my breath have to do with anxiety?"].map((t) => ({ title: t, right: "Coming soon" }))} />
       </Section>
       <Note><p className="font-serif text-xl">Want it live for your team?</p><p className="mt-1">Awareness talks can be given live for companies and groups. See <a className="underline underline-offset-4" href="/employee-wellness">Employee wellness</a> for details.</p></Note>
       <Teacher bio="I record these talks to explain, in simple words, why these practices help and how to begin. No jargon, and no pressure to join a class." />

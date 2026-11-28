@@ -43,6 +43,6 @@ function Wellness() {
       <Teacher bio="I know how heavy a workday can feel. My sessions for teams are short, practical, and easy to join, whatever the fitness level." />
     </Page>
     <Footer title="Start with a pilot session" text="Tell us your team size and what you would like to improve. We will suggest a plan."
-      action={<FooterButton href={pilot}>Request a pilot session</FooterButton>} small="Invoices on request" />
+      action={<FooterButton href={pilot}>Request a pilot session</FooterButton>} small="Online" />
   </>);
 }

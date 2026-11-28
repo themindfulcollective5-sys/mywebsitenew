@@ -52,11 +52,11 @@ function Classes() {
       <Hero label="Yoga · Breath · Sound" title="Find your pace, find your calm" text="Small-group classes for every body and every mood."
         cta={<PrimaryButton href="#finder">Find my class</PrimaryButton>} link={<TextLink href="/awareness">Watch free talks</TextLink>}  />
       <Finder id="finder" title="How do you feel today?" intro="Choose one, and we will suggest a class." options={[
-        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop.", meta: "Weekend" },
-        { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace.", meta: "Take It Slow Friday · Fridays" },
-        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with.", meta: "Weekend" },
-        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop.", meta: "Weekend" },
-        { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you.", meta: "Every Sunday" },
+        { chip: "I can't sleep", name: "Yoga Nidra", desc: "Deep rest, even when your mind won't stop." },
+        { chip: "My back feels stiff", name: "Yin Yoga", desc: "Slow, gentle movement at your own pace." },
+        { chip: "I can't focus", name: "Pranayama", desc: "A steady breath to begin with." },
+        { chip: "I overthink", name: "Brain Dump (Journaling)", desc: "Get thoughts on paper, not on loop." },
+        { chip: "I feel anxious", name: "Sound Meditation", desc: "Let sound settle you." },
       ]} />
       <Section title="Classes">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -96,7 +96,7 @@ function Classes() {
       <Section title="Me Time" intro="Sessions to reconnect with yourself.">
         <ClassRows rows={[
           { title: "Yoga Nidra", second: "45 minutes · Weekend", desc: "When was the last time you truly rested?", right: "₹499", unit: "per session", book: "nidra" },
-          { title: "The Art of Letting Go", second: "1.5 hours", desc: "When did you last let go of something you've carried for years?", right: "₹1,299", unit: "per session", book: "letting-go" },
+          { title: "The Art of Letting Go", second: "1.5 hours · Weekend", desc: "When did you last let go of something you've carried for years?", right: "₹1,299", unit: "per session", book: "letting-go" },
         ]} />
       </Section>
       <Note><p className="font-serif text-xl">Not sure about a class?</p><p className="mt-1">Every class has a short, free talk explaining why it helps and what to expect. Open Awareness in the menu to watch.</p></Note>
